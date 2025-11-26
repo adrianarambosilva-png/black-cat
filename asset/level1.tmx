@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="19" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="9">
+ <tileset firstgid="1" name="sprite_tiles1" tilewidth="32" tileheight="32" tilecount="100" columns="10">
+  <image source="sprite_tiles1.png" width="320" height="320"/>
+ </tileset>
+ <layer id="1" name="plataformas" width="19" height="15">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3,0,0,0,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,
+0,0,3,0,3,0,0,0,0,0,3,3,3,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,2,2,0,0,
+0,0,0,0,0,0,0,0,0,3,0,0,2,0,0,2,2,0,0,
+0,0,0,0,0,3,3,0,0,2,0,0,2,0,0,2,2,0,0,
+3,3,3,0,0,2,2,0,0,2,0,0,2,0,0,2,2,0,0,
+2,2,2,0,0,2,2,0,0,2,0,0,2,0,0,2,2,0,0,
+2,2,2,0,0,2,2,0,0,2,0,0,2,0,0,2,2,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="object">
+  <object id="1" name="spawn" x="14.6924" y="371.423"/>
+  <object id="2" name="peixe" type="string" x="80.5142" y="369.66"/>
+  <object id="3" name="peixe" type="string" x="207.456" y="339.1"/>
+  <object id="4" name="peixe" type="string" x="302.663" y="306.189"/>
+  <object id="5" name="peixe" type="string" x="527.163" y="240.367"/>
+  <object id="6" name="peixe" type="string" x="335.574" y="115.188"/>
+  <object id="7" name="peixe" type="string" x="209.807" y="82.2773"/>
+  <object id="8" name="lata" type="string" x="15.2801" y="82.2773"/>
+ </objectgroup>
+</map>

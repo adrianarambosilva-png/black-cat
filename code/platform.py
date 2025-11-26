@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 class Platform:
-    def __init__(self):
+    def __init__(self, window, name, menu_option):
         self.x = None
         self.y = None
         self.image = None

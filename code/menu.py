@@ -1,53 +1,66 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import pygame.image
+import pygame
 import os
 
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.const import WIN_WIDTH, COLOR_ORANGE, MENU_OPTION, C_WHITE
+from code.const import WIN_WIDTH, WIN_HEIGHT, C_BLACK, MENU_OPTION, C_WHITE, C_YELLOW
 
-print("Procurando:", os.getcwd())
-print("existe?", os.path.exists('./asset/menubd.png'))
 
 class Menu:
     def __init__(self, window):
         self.window = window
-        self.surf = pygame.image.load('asset/menubd.png')
+        self.surf = pygame.image.load('asset/menubd.png').convert()
         self.rect = self.surf.get_rect(left=0, top=0)
 
+        # Música do menu
+        pygame.mixer.music.load('asset/menumusic.wav')
+        pygame.mixer.music.play(-1)
+
     def run(self):
+        menu_option = 0
         running = True
+
         while running:
+
+            # EVENTOS
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
 
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RETURN:  # Enter para sair do menu
-                        running = False
 
-            pygame.mixer_music.load('./asset/menumusic.wav')
-            pygame.mixer_music.play(-1)
-            while True:
-                self.window.blit(self.surf, self.rect)
-                self.menu_text(50, "Black Cat", COLOR_ORANGE, ((WIN_WIDTH / 2), 70))
+                    if event.key == pygame.K_DOWN:
+                        menu_option = (menu_option + 1) % len(MENU_OPTION)
 
-                for i in range(len(MENU_OPTION)):
-                    self.menu_text(20, MENU_OPTION[i], C_WHITE, ((WIN_WIDTH / 2), 200 + 30 * i))
+                    if event.key == pygame.K_UP:
+                        menu_option = (menu_option - 1) % len(MENU_OPTION)
 
-                pygame.display.flip()
+                    if event.key == pygame.K_RETURN:
+                        return MENU_OPTION[menu_option]  # <-- retorna escolha
 
-                # Check for all events
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        pygame.quit()
-                        quit()
+            # ===== DESENHO =====
+            self.window.blit(self.surf, self.rect)
 
-    def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
-        text_font: Font = pygame.font.SysFont(name="Lucida Sans Typewriter", size=text_size)
-        text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
-        text_rect: Rect = text_surf.get_rect(center=text_center_pos)
-        self.window.blit(source=text_surf, dest=text_rect)
+            # Título
+            self.menu_text(50, "Black Cat", C_BLACK, (WIN_WIDTH / 2, 70))
+
+            # Opções do menu
+            for i in range(len(MENU_OPTION)):
+                cor = C_YELLOW if i == menu_option else C_WHITE
+                self.menu_text(25, MENU_OPTION[i], cor, (WIN_WIDTH / 2, 200 + 45 * i))
+
+            # --- COMANDOS NO CANTO INFERIOR DIREITO ---
+            self.menu_text(18, "Espaço = pular", C_WHITE, (WIN_WIDTH - 120, WIN_HEIGHT - 60))
+            self.menu_text(18, "Setas = mover", C_WHITE, (WIN_WIDTH - 120, WIN_HEIGHT - 30))
+
+            pygame.display.flip()
+
+    def menu_text(self, text_size: int, text: str, text_color: tuple, pos: tuple):
+        text_font = pygame.font.SysFont("Lucida Sans Typewriter", text_size)
+        text_surf = text_font.render(text, True, text_color)
+        text_rect = text_surf.get_rect(center=pos)
+        self.window.blit(text_surf, text_rect)
